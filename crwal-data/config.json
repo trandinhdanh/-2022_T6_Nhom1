@@ -1,0 +1,10 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": 3306,
+        "user": "root",
+        "password": "tRu0n927@4!",
+        "database": "db_warehouse",
+        "pathFileLog": "E:/Project/weather-data-warehouse/data/xoso_net"
+    }
+}
