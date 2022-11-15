@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "pack":"pkg -t node12-win-x64 ./src/controller/crawl.js"
+      "pack":"pkg -t node12-win-x64 ./src/controller/crawl.controller.js"
     },
     "author": "",
     "license": "ISC",
