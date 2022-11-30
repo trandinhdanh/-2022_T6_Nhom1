@@ -9,10 +9,10 @@ var currentDate = date.getFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + da
 async function crawlDB() {
   let fileConfig = await db.getDataTable("file_config");
   
-  if (db.getFileLogToday(fileConfig[0].date_config, "TRANSFORM SUCCESS")){
-    const fileName = fileConfig[0].date_config + "-" + fileConfig[0].website + ".csv";
+  if (db.getFileLogToday(currentDate, "TRANSFORM SUCCESS")){
+    const fileName = currentDate + "-" + fileConfig[0].website + ".csv";
     const filePath = fileConfig[0].file_folder + fileName;
-    db.insertFileLog(fileConfig[0].date_config, fileName, filePath, "", "EXTRACT START");
+    db.insertFileLog(currentDate, fileName, filePath, "", "EXTRACT START");
     
     if (fileConfig[0].website = "www.xoso.net"){
       const URL = `${fileConfig[0].url}`;
@@ -24,12 +24,12 @@ async function crawlDB() {
         },
       };
 
-      crawlService.crawlerXosoNet(options, fileConfig[0].website, fileConfig[0].date_config, filePath)
+      crawlService.crawlerXosoNet(options, fileConfig[0].website, currentDate, filePath)
       .then (isWrite =>{
         if (isWrite){
           db.updateFileLog("Lấy dữ liệu thành công!", "EXTRACT READY");
 
-          if (db.getFileLogToday(fileConfig[0].date_config, "EXTRACT READY")){
+          if (db.getFileLogToday(currentDate, "EXTRACT READY")){
             db.setLocalFile();
             
             if (db.insertStaging(filePath)){
@@ -40,7 +40,7 @@ async function crawlDB() {
                   db.updateStaging("date_dim", "ngay", "full_date", "date_sk"))
               {
 
-                if (db.getFileLogToday(fileConfig[0].date_config, "STAGING READY")){
+                if (db.getFileLogToday(currentDate, "STAGING READY")){
                   if (db.updateValidWarehouse()){
                     db.copyData();
                     db.updateFileLog("Chuyển dữ liệu sang WAREHOUSE thành công!", "TRANSFORM SUCCESS");

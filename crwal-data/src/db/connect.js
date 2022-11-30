@@ -92,8 +92,8 @@ async function updateValidWarehouse() {
 }
 
 async function copyData() {
-  let sql = `INSERT INTO warehouse (website, date, tinh, giai_db, giai_1, giai_2, giai_3, giai_4, giai_5, giai_6, giai_7, giai_8)
-                SELECT website, ngay, tinh, giai_db, giai_1, giai_2, giai_3, giai_4, giai_5, giai_6, giai_7, giai_8 FROM staging;`;
+  let sql = `INSERT INTO warehouse (website, date, city, type, giai_db, giai_1, giai_2, giai_3, giai_4, giai_5, giai_6, giai_7, giai_8)
+                SELECT website, ngay, tinh, loai_ve, giai_db, giai_1, giai_2, giai_3, giai_4, giai_5, giai_6, giai_7, giai_8 FROM staging;`;
   connection.query(sql, (error) => {
     if (!error) {
       connection.query("TRUNCATE staging;");
