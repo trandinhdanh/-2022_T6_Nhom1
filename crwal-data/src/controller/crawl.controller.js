@@ -4,7 +4,13 @@ const crawlService = require("../service/crawl.service");
 
 
 var date = new Date();
-var currentDate = date.getFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getDate();
+var currentDate;
+if (date.getDate() < 10) {
+  currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-0" + date.getDate();
+} else {
+  currentDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+}
+
 
 async function crawlDB() {
   let fileConfig = await db.getDataTable("file_config");
@@ -36,8 +42,9 @@ async function crawlDB() {
               db.updateFileLog("Thêm dữ liệu vào Staging thành công!", "STAGING READY");
 
               if (db.updateStaging("website_dim", "website", "domain", "web_sk") && 
-                  db.updateStaging("city_dim", "tinh", "city_name", "city_sk") &&
-                  db.updateStaging("date_dim", "ngay", "full_date", "date_sk"))
+                  db.updateStaging("date_dim", "ngay", "full_date", "date_sk") &&
+                  db.updateStaging("city_dim", "tinh", "city_name", "city_sk")) 
+                  
               {
 
                 if (db.getFileLogToday(currentDate, "STAGING READY")){
