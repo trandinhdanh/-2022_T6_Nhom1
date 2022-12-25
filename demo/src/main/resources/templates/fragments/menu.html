@@ -1,0 +1,55 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="menu">
+    <div class="dnw-nav">
+        <div class="dnw-nav-l">
+            <div class="dnw-nav-r">
+                <div style="clear:both"></div>
+                <script type="text/javascript"> window.onload = function () {
+                    ddsmoothmenu.init({
+                        mainmenuid: "smoothmenu",
+                        orientation: 'h',
+                        classname: 'ddsmoothmenu',
+                        contentsource: "markup"
+                    })
+                } </script>
+                <div id="main-menu">
+                    <div id="smoothmenu" class="ddsmoothmenu">
+                        <ul>
+                            <li><a href="#"><span>Sổ Kết Quả</span></a>
+                                <ul class="submenu-border">
+                                    <div class="top-menu-popup">
+                                        <li><a href="/kqxs.html"
+                                               class="parent"><span>KQXS Theo Tỉnh/TP</span></a>
+                                            <ul class="submenu-border" id="menukqxstinh">
+                                                <div class="top-menu-popup">
+                                                    <li class="root"><a href="/kqxs/mien-nam.html"
+                                                                        title="Kết quả xổ số Miền Nam - Xem KQXS các tỉnh Miền Nam theo ngày"><span><strong>Kết quả xổ số Miền Nam</strong></span></a>
+                                                    </li>
+                                                    <li th:each="item : ${cityNam}"><a href="/ket-qua-xo-so/mien-nam/an-giang.html"><span th:text="${item.cityName}"></span></a>
+                                                    </li>
+                                                    <li class="root"><a href="/kqxs/mien-bac.html"
+                                                                        title="Kết quả xổ số Miền Bắc - Xem KQXS các tỉnh Miền Bắc theo ngày"><span><strong>Kết quả xổ số Miền Bắc</strong></span></a>
+                                                    </li>
+                                                    <li class="root"><a href="/kqxs/mien-trung.html"><span><strong>Kết quả xổ số Miền Trung</strong></span></a>
+                                                    </li>
+                                                    <li  th:each="item : ${cityTrung}">
+                                                        <a href="/ket-qua-xo-so/mien-trung/binh-dinh.html"><span th:text="${item.cityName}"></span></a>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </li>
+
+                                    </div>
+                                </ul>
+                            </li>
+                            <li><a href="/tin-tuc.html"><span>Thông Tin</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
